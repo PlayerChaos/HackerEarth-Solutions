@@ -10,17 +10,17 @@ class MonkAndRotations {
         for (int i = 0; i < T; i++) {
             int N = scanner.nextInt();
             int K = scanner.nextInt();
+            if (K>N){
+                K = K%N;
+            }
             int[] arr = new int[N];
             for (int j = 0; j < N; j++) {
                 arr[j] = scanner.nextInt();
             }
-            for (int j = 0; j < K; j++) {
-                int l, temp;
-                temp = arr[arr.length - 1];
-                for (l = arr.length - 1; l > 0; l--)
-                    arr[l] = arr[l - 1];
-                arr[l] = temp;
-            }
+            int[] aux = new int[K];
+            System.arraycopy(arr, N - K, aux, 0, K);
+            System.arraycopy(arr, 0, arr, K, N - K - 1 + 1);
+            System.arraycopy(aux, 0, arr, 0, K);
             list.add(arr);
         }
         for (int[] ints : list) {
